@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image Layout</title>
+    <style>
+      .container {
+        text-align: center;
+      }
+      .main-image {
+        width: 400px;
+        height: 400px;
+        margin: 0 auto;
+      }
+      .sub-images {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .sub-image {
+        width: 200px;
+        height: 200px;
+        margin: 0 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Rock Paper Scissor</h1>
+      <h3 id="win-text"></h3>
+    </div>
+    <div class="container">
+      <img src="images/empty.png" alt="Main Image" class="main-image" id="main-image"/>
+      <div class="sub-images">
+        <button class="invisible-button" onclick="buttonClick('paper')">
+          <img
+            src="images/paper.png"
+            alt="Sub Image 1"
+            class="sub-image"
+          />
+        </button>
+        <button class="invisible-button" onclick="buttonClick('rock')">
+          <img
+            src="images/rock.png"
+            alt="Sub Image 2"
+            class="sub-image"
+          />
+        </button>
+        <button class="invisible-button" onclick="buttonClick('scissor')">
+          <img
+            src="images/scissor.png"
+            alt="Sub Image 3"
+            class="sub-image"
+          />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
