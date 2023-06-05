@@ -29,30 +29,42 @@
       <h3 id="win-text"></h3>
     </div>
     <div class="container">
+      <h3 id="win-lost-text">Wins: Losts: </h3>
       <img src="images/empty.png" alt="Main Image" class="main-image" id="main-image"/>
       <div class="sub-images">
         <button class="invisible-button" onclick="buttonClick('paper')">
           <img
             src="images/paper.png"
-            alt="Sub Image 1"
+            alt="Paper"
             class="sub-image"
           />
         </button>
         <button class="invisible-button" onclick="buttonClick('rock')">
           <img
             src="images/rock.png"
-            alt="Sub Image 2"
+            alt="Rock"
             class="sub-image"
           />
         </button>
         <button class="invisible-button" onclick="buttonClick('scissor')">
           <img
             src="images/scissor.png"
-            alt="Sub Image 3"
+            alt="Scissor"
             class="sub-image"
           />
         </button>
       </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js">
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js">
+
+    </script>
+
+    <script src="index.js">
+    </script>
+    
   </body>
 </html>

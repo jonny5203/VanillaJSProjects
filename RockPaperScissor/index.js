@@ -1,7 +1,13 @@
 var localState = {
     userChoice: '',
-    win: 0,
+    wins: 0,
+    losts: 0
 }
+
+// Init firebase
+const app = firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore(app);
+print(db);
 
 function buttonClick(imageTag){
     switch(imageTag){
@@ -45,3 +51,40 @@ function displayWinOrLoose(){
 function changeText(idTag, text){
     document.getElementById(idTag).innerHTML = text;
 }
+
+function updateWinLost(win){
+    if(win == 1){
+        localState.wins++;
+    }else if(win == 2){
+        localState.losts++;
+    }
+}
+
+function changeWinLostText(){
+    changeText('win-lost-text', `Wins: ${localState.wins} Losts: ${localState.losts}`);
+}
+
+// create a session with firebase
+function createSession(){
+    let session = {
+        id: '',
+        players: {
+            player1: {
+                id: '',
+                name: '',
+                choice: '',
+                sessionWinRate: 0,
+                sessionLosts: 0,
+            },
+            player2: {
+                id: '',
+                name: '',
+                choice: '',
+                sessionWins: 0,
+                sessionLosts: 0,
+            }
+        },
+        currentWinner: ''
+    }
+}
+

@@ -1,0 +1,57 @@
+<script setup lang="ts">
+defineProps<{
+    Username: string,
+    Password: string
+}>()
+</script>
+
+<template>
+  <body>
+    <div class="container">
+      <h2>Login</h2>
+      <form>
+        <input type="text" placeholder="Username" required /><br />
+        <input type="password" placeholder="Password" required /><br />
+        <button type="submit">Login</button>
+      </form>
+      <button class="signup-btn" >Sign In</button>
+    </div>
+  </body>
+</template>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+.container {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center; /* Center align the container */
+}
+.container h2 {
+  margin-bottom: 20px;
+}
+.container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+.container button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #4caf50;
+  color: #fff;
+  cursor: pointer;
+}
+.container button.signup-btn {
+  background-color: #ccc;
+  margin-top: 10px;
+}
+</style>

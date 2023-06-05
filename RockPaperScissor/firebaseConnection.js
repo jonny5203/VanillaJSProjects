@@ -4,6 +4,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebas
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+// Import the functions you need from the SDK
+import { getFirestore, collection, getDocs, addDoc, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyD0Wrcdd6H6D8Pa83fs5BNXLPXlos6qQkU",
@@ -17,4 +20,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export {app};
+const db = getFirestore(app);
+
+export {app, db};
