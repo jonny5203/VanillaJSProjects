@@ -3,34 +3,34 @@ import { ref } from 'vue'
 
 const imageSourceList = [
   '/src/images/empty.png',
-  '/src/images/paper.png', 
-  '/src/images/rock.png', 
-  '/src/images/scissor.png']
+  '/src/images/paper.png',
+  '/src/images/rock.png',
+  '/src/images/scissor.png'
+]
 
 const imageSource = ref(imageSourceList[0])
 
 function changeImage(imageNum: number) {
-  imageSource.value = imageSourceList[imageNum];
+  imageSource.value = imageSourceList[imageNum]
 }
 
 function resetImage() {
-  imageSource.value = imageSourceList[0];
+  imageSource.value = imageSourceList[0]
 }
 </script>
 
 <script lang="ts">
-
 import { initializeApp } from 'firebase/app'
-import { getFirestore, collection } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 // ... other firebase imports
 
 export const firebaseApp = initializeApp({
-    apiKey: "AIzaSyD0Wrcdd6H6D8Pa83fs5BNXLPXlos6qQkU",
-    authDomain: "rockpaperscissor-c8251.firebaseapp.com",
-    projectId: "rockpaperscissor-c8251",
-    storageBucket: "rockpaperscissor-c8251.appspot.com",
-    messagingSenderId: "404103544895",
-    appId: "1:404103544895:web:6dd9e9c3bbbadb53cab88a"
+  apiKey: 'AIzaSyD0Wrcdd6H6D8Pa83fs5BNXLPXlos6qQkU',
+  authDomain: 'rockpaperscissor-c8251.firebaseapp.com',
+  projectId: 'rockpaperscissor-c8251',
+  storageBucket: 'rockpaperscissor-c8251.appspot.com',
+  messagingSenderId: '404103544895',
+  appId: '1:404103544895:web:6dd9e9c3bbbadb53cab88a'
 })
 
 // used for the firestore refs
@@ -40,74 +40,99 @@ console.log(db)
 
 // here we can export reusable database references
 // export const todosRef = collection(db, 'todos')
-</script>
 
-<script lang="ts">
-import { collection, getDocs, addDoc, doc, updateDoc, deleteDoc, increment } from 'firebase/firestore'
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  updateDoc,
+  deleteDoc,
+  increment,
+  onSnapshot
+} from 'firebase/firestore'
 
-import { db } from "./FirebaseConnection";
-import User from "../model/userModel";
+import User from '../model/userModel'
 
-function getCollection(collectionName: string){
-    const collectionRef = collection(db, collectionName);
-    return collectionRef;
+// listen to changes on a document
+function listenToDocument(collectionName: string, docId: string) {
+  const docRef = doc(db, collectionName, docId)
+  const unsubscribe = onSnapshot(docRef, (doc) => {
+    console.log('Current data: ', doc.data())
+  })
+  return unsubscribe
+}
+
+function getCollection(collectionName: string) {
+  const collectionRef = collection(db, collectionName)
+  return collectionRef
 }
 
 // gets all documents from a collection
-function getDocuments(collectionName: string){
-    const collectionRef = getCollection(collectionName);
-    const querySnapshot = getDocs(collectionRef);
-    return querySnapshot;
+function getDocuments(collectionName: string) {
+  const collectionRef = getCollection(collectionName)
+  const querySnapshot = getDocs(collectionRef)
+  return querySnapshot
 }
 
 // adds a User to the collection of Users
-function addUserDocument(collectionName: string, data: User){
-    const collectionRef = getCollection(collectionName);
-    const docRef = addDoc(collectionRef, data);
-    return docRef;
+function addUserDocument(collectionName: string, data: User) {
+  const collectionRef = getCollection(collectionName)
+  const docRef = addDoc(collectionRef, data)
+  return docRef
 }
 
 // adds a Session to the collection of Sessions
-function addSessionDocument(collectionName: string, data: User){
-    const collectionRef = getCollection(collectionName);
-    const docRef = addDoc(collectionRef, data);
-    return docRef;
+function addSessionDocument(collectionName: string, data: User) {
+  const collectionRef = getCollection(collectionName)
+  const docRef = addDoc(collectionRef, data)
+  return docRef
 }
 
 // gets a document from a collection
-function getDocument(collectionName: string, docId: string){
-    const docRef = doc(db, collectionName, docId);
-    return docRef;
+function getDocument(collectionName: string, docId: string) {
+  const docRef = doc(db, collectionName, docId)
+  return docRef
 }
 
 // increment wins and gamesPlayed by 1
-function incrementWins(collectionName: string, docId: string){
-    const docRef = getDocument(collectionName, docId);
-    const docSnap = updateDoc(docRef, {
-        wins: increment(1),
-        gamesPlayed: increment(1)
-    });
-    return docSnap;
+function incrementWins(collectionName: string, docId: string) {
+  const docRef = getDocument(collectionName, docId)
+  const docSnap = updateDoc(docRef, {
+    wins: increment(1),
+    gamesPlayed: increment(1)
+  })
+  return docSnap
 }
 
 // increment losts and gamesPlayed by 1
-function incrementLosts(collectionName: string, docId: string){
-    const docRef = getDocument(collectionName, docId);
-    const docSnap = updateDoc(docRef, {
-        losts: increment(1),
-        gamesPlayed: increment(1)
-    });
-    return docSnap;
+function incrementLosts(collectionName: string, docId: string) {
+  const docRef = getDocument(collectionName, docId)
+  const docSnap = updateDoc(docRef, {
+    losts: increment(1),
+    gamesPlayed: increment(1)
+  })
+  return docSnap
 }
 
 // deletes a document from a collection
-function deleteDocument(collectionName: string, docId: string){
-    const docRef = getDocument(collectionName, docId);
-    const docSnap = deleteDoc(docRef);
-    return docSnap;
+function deleteDocument(collectionName: string, docId: string) {
+  const docRef = getDocument(collectionName, docId)
+  const docSnap = deleteDoc(docRef)
+  return docSnap
 }
 
-export { getCollection, getDocuments, addUserDocument, addSessionDocument, getDocument, deleteDocument, incrementWins, incrementLosts };
+export {
+  getCollection,
+  getDocuments,
+  addUserDocument,
+  addSessionDocument,
+  getDocument,
+  deleteDocument,
+  incrementWins,
+  incrementLosts,
+  listenToDocument
+}
 </script>
 
 <template>
